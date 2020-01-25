@@ -9,11 +9,14 @@ with open("jukebox.txt") as file:
             all.extend(urls)
 
 #print(all)
-spotify_links = []
+track_list = []
 for url in all:
     about = urlparse(url)
     if(about.netloc == "open.spotify.com"):
         data = about.path.split("/")
-        print(data)
+        if(data[1]=='track'):
+            track_list.append(data[2])
 
 #print(spotify_links)
+print(track_list)
+print(len(track_list))
