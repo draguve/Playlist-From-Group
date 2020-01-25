@@ -1,6 +1,8 @@
 import re
 from urllib.parse import urlparse
 
+import spotipy
+import spotipy.util as util
  
 all = []
 with open("jukebox.txt") as file:
@@ -20,3 +22,15 @@ for url in all:
 #print(spotify_links)
 print(track_list)
 print(len(track_list))
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+i=0
+for trax in chunks(track_list,50):
+    with open('tracks%s.txt'% str(i), 'w') as f:
+        for item in trax:
+            f.write("spotify:track:%s," % item)
+    i=i+1
